@@ -12,6 +12,7 @@ class Hud {
     const options = {
         x: 10,
         y: 10,
+        width: 75,
         fixedToCamera: true,
         visible: true
     };

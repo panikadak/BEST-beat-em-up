@@ -2,6 +2,7 @@ const { join, resolve } = require(`path`);
 const webpack = require(`webpack`);
 const HtmlWebpackPlugin = require(`html-webpack-plugin`);
 const DashboardPlugin = require(`webpack-dashboard/plugin`);
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const isDevelopment = process.env.NODE_ENV === `development`;
 
@@ -50,6 +51,10 @@ const plugins = {
         conservativeCollapse: true,
       },
     }),
+    new CopyWebpackPlugin([
+      { from: 'src/assets/sfx', to: 'assets/sfx' },
+      { from: 'src/assets/musics', to: 'assets/musics' }
+    ]),
   ],
 
   development: [

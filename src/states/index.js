@@ -4,7 +4,6 @@ export * from './preloader';
 export * from './main-menu';
 export * from './options';
 export * from './options-audio';
-export * from './credits';
 export * from './loading';
 export * from './intro';
 export * from './act01';

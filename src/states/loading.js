@@ -48,9 +48,9 @@ class Loading extends Renderer {
 
     // load audios
     let nextStateText = '';
-    if (this.nextState == 'intro' || this.nextState == 'options-audio') {
+    if (this.nextState == 'options-audio') {
       Audio.loadMusic(this.game, 'maintheme');
-      nextStateText = 'INTRO';
+      nextStateText = 'OPTIONS';
     }
     else if(this.nextState == 'act1') {
       Audio.loadMusic(this.game, 'maintheme');
@@ -69,13 +69,20 @@ class Loading extends Renderer {
     }
 
     // add text to screen
+    const screenHeight = this.game.world.height;
+    const titleSize = Math.floor(screenHeight * 0.1); // Title size is 10% of screen height
+    const loadingSize = Math.floor(screenHeight * 0.05); // Loading text size is 5% of screen height
+
     const stateText = this.game.add.bitmapText(this.game.world.centerX,
-      this.game.world.centerY - 48, Globals.bitmapFont, nextStateText, 24);
+      this.game.world.centerY - (screenHeight * 0.2), // 20% up from center
+      Globals.bitmapFont, nextStateText, titleSize);
     stateText.anchor.setTo(0.5);
     stateText.scale.setTo(0);
     this.game.add.tween(stateText.scale).to({ x: 1, y: 1 }, 500, Phaser.Easing.Linear.None, true);
 
-    this.text = this.game.add.bitmapText(this.game.world.centerX, this.game.world.centerY + 8, Globals.bitmapFont, '', 12);
+    this.text = this.game.add.bitmapText(this.game.world.centerX, 
+      this.game.world.centerY + (screenHeight * 0.1), // 10% down from center
+      Globals.bitmapFont, '', loadingSize);
     this.text.anchor.setTo(0.5);
 
     this.timer.start();
@@ -92,9 +99,12 @@ class Loading extends Renderer {
   }
 
   loadComplete() {
+    const screenHeight = this.game.world.height;
+    const skipSize = Math.floor(screenHeight * 0.04); // Skip text size is 4% of screen height
+
     const skipText = this.game.add.bitmapText(this.game.world.centerX, 
-      this.game.world.height - 8, 
-      Globals.bitmapFont, 'Press Punch or Kick to skip', 12);
+      this.game.world.height - (screenHeight * 0.05), // 5% from bottom
+      Globals.bitmapFont, 'Press Punch or Kick to skip', skipSize);
     skipText.anchor.setTo(0.5);
     skipText.alpha = 0;
 

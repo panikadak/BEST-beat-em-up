@@ -75,26 +75,29 @@ class Preloader extends Renderer {
 
     // create splash screen
     const splashText = this.game.add.bitmapText(this.game.world.centerX,
-      this.game.world.centerY, Globals.bitmapFont, 'TEAM KICKPUNCH', 20);
+      this.game.world.centerY - 40, Globals.bitmapFont, 'BARIO', 20);
     splashText.anchor.setTo(0.5);
-    splashText.alpha = 0;
 
-    // add some cool effects
-    const tween = this.game.add.tween(splashText).to({ alpha: 1 },
-      PreloaderConsts.SPLASH_FADE, Phaser.Easing.Linear.None, true, 0, 0, true);
+    const entertainmentText = this.game.add.bitmapText(this.game.world.centerX,
+      this.game.world.centerY, Globals.bitmapFont, 'ENTERTAINMENT', 18);
+    entertainmentText.anchor.setTo(0.5);
 
-    tween.onComplete.add((splashText, tween) => {
-      const presentsText = this.game.add.bitmapText(this.game.world.centerX,
-        this.game.world.centerY, Globals.bitmapFont, 'PRESENTS', 18);
-        presentsText.anchor.setTo(0.5);
-        presentsText.alpha = 0;
+    const systemText = this.game.add.bitmapText(this.game.world.centerX,
+      this.game.world.centerY + 40, Globals.bitmapFont, 'SYSTEM', 18);
+    systemText.anchor.setTo(0.5);
 
-      const tween2 = this.game.add.tween(presentsText).to({ alpha: 1 },
-        PreloaderConsts.SPLASH_FADE, Phaser.Easing.Linear.None, true, 0, 0, true);
-        tween2.onComplete.add(() => {
+    // 1.5 saniye bekle, sonra fade out efekti ile kaybol
+    this.game.time.events.add(1500, () => {
+      // Tüm metinlere fade out efekti uygula
+      this.game.add.tween(splashText).to({ alpha: 0 }, 500, Phaser.Easing.Linear.None, true);
+      this.game.add.tween(entertainmentText).to({ alpha: 0 }, 500, Phaser.Easing.Linear.None, true);
+      const lastTween = this.game.add.tween(systemText).to({ alpha: 0 }, 500, Phaser.Easing.Linear.None, true);
+
+      // Son fade out tamamlandığında ana menüye geç
+      lastTween.onComplete.add(() => {
         this.state.start('mainmenu');
       });
-    }, this);
+    });
   }
 
 }

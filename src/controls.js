@@ -44,6 +44,10 @@ class Controls {
       jumps: [
         game.input.keyboard.addKey(Phaser.Keyboard.J),
         game.input.keyboard.addKey(Phaser.Keyboard.SPACE)
+      ],
+      pause: [
+        game.input.keyboard.addKey(Phaser.Keyboard.ESC),
+        game.input.keyboard.addKey(Phaser.Keyboard.ENTER)
       ]
     };
 
@@ -155,6 +159,10 @@ class Controls {
     //   this._keyPressed(this.keys.jumps) ||
     //   this._padPressed(Phaser.Gamepad.XBOX360_A)
     // );
+  }
+
+  get pause() {
+    return this._keyPressed(this.keys.pause);
   }
 
   // DEBUG

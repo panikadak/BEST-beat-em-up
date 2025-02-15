@@ -60,6 +60,17 @@ class GamePlay extends Renderer {
     // short cut to our custom audio manager
     this.game.audio = this.audio;
 
+    // Oyun duraklatma durumu için değişken
+    this._isPaused = false;
+
+    // Pause text
+    this._pauseText = this.game.add.bitmapText(this.game.world.centerX,
+      this.game.world.centerY, Globals.bitmapFont, 'PAUSED', 32);
+    this._pauseText.anchor.setTo(0.5);
+    this._pauseText.visible = false;
+    this._pauseText.fixedToCamera = true;
+    this._pauseText.tint = 0x000000; 
+
     // The 'behind' group is basically a layer in the level the contains sprites
     // behind the sidewalk objects layer. We need to put objects either in front
     // or behind the sidewalk layer
@@ -385,6 +396,19 @@ class GamePlay extends Renderer {
   update() {
     super.update();
 
+    // Pause kontrolü
+    if (this.controls.pause) {
+      if (!this._isPaused) {
+        this._pauseGame();
+      } else {
+        this._resumeGame();
+      }
+    }
+
+    if (this._isPaused) {
+      return;
+    }
+
     // Hangs everything else updates dialog box only
     if(this.dialogBox) {
       this.dialogBox.update();
@@ -460,6 +484,45 @@ class GamePlay extends Renderer {
       } else if(this.controls.debug('makeRain')) {
         this.specialFx.weather.addRain();
       }
+    }
+  }
+
+  _pauseGame() {
+    this._isPaused = true;
+    this.game.physics.arcade.isPaused = true;
+    this._pauseText.visible = true;
+    this.game.world.bringToTop(this._pauseText);
+
+    // Tüm animasyonları durdur
+    if (this.player) {
+      this.player.sprite.animations.paused = true;
+    }
+    for (const actor of this.enemies) {
+      actor.sprite.animations.paused = true;
+    }
+
+    // Müziği durdur
+    if (this.audio._current) {
+      this.audio._current.pause();
+    }
+  }
+
+  _resumeGame() {
+    this._isPaused = false;
+    this.game.physics.arcade.isPaused = false;
+    this._pauseText.visible = false;
+
+    // Tüm animasyonları devam ettir
+    if (this.player) {
+      this.player.sprite.animations.paused = false;
+    }
+    for (const actor of this.enemies) {
+      actor.sprite.animations.paused = false;
+    }
+
+    // Müziği devam ettir
+    if (this.audio._current) {
+      this.audio._current.resume();
     }
   }
 

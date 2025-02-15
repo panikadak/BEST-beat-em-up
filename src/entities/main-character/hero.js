@@ -8,7 +8,7 @@ const HeroConsts = {
   KICK_DAMAGE: 15,
   PUNCH_COOLDOWN: 100, // ms
   KICK_COOLDOWN: 80, // ms
-  HEALTH: 100,
+  HEALTH: 500,
   SPEED: 40,
   WEIGHT: 1, // plays a role when player's being knocked back afer being hit
   KNOCKOUT_TIME: 500, // ms

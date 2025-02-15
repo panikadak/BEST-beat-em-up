@@ -27,7 +27,7 @@ class OptionsAudio extends Renderer {
     const screenCenter = this.game.world.centerX;
 
     const menuTitle = this.game.add.bitmapText(screenCenter, 30,
-      Globals.bitmapFont, 'KickPunch', 30);
+      Globals.bitmapFont, 'BIT BRAWLER', 20);
     menuTitle.anchor.setTo(0.5);
 
     // create a text for each option

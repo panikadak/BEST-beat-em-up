@@ -7,63 +7,72 @@ const DEFAULT_FADEOUT = 2500;
 class Audio {
 
   static loadSfx(game) {
-    game.load.audio('hero-dive', require('./assets/sfx/BrianDive.m4a'));
-    game.load.audio('hero-jump', require('./assets/sfx/BrianJump.m4a'));
-    game.load.audio('hero-kick1', require('./assets/sfx/BrianKick1.m4a'));
-    game.load.audio('hero-kick2', require('./assets/sfx/BrianKick2.m4a'));
-    game.load.audio('hero-kick3', require('./assets/sfx/BrianKick3.m4a'));
-    game.load.audio('hero-punch1', require('./assets/sfx/BrianPunch1.m4a'));
-    game.load.audio('hero-punch2', require('./assets/sfx/BrianPunch2.m4a'));
-    game.load.audio('hero-punch3', require('./assets/sfx/BrianPunch3.m4a'));
-    game.load.audio('death1', require('./assets/sfx/Death1.m4a'));
-    game.load.audio('death2', require('./assets/sfx/Death2.m4a'));
-    game.load.audio('death3', require('./assets/sfx/Death3.m4a'));
-    game.load.audio('death4', require('./assets/sfx/Death4.m4a'));
-    game.load.audio('door1', require('./assets/sfx/Door1.m4a'));
-    game.load.audio('door2', require('./assets/sfx/Door2.m4a'));
-    game.load.audio('door3', require('./assets/sfx/Door3.m4a'));
-    game.load.audio('foodpickup', require('./assets/sfx/FoodPickup.m4a'));
-    game.load.audio('gameover', require('./assets/sfx/GameOver.m4a'));
-    game.load.audio('go', require('./assets/sfx/Go.m4a'));
-    game.load.audio('npcdespawn', require('./assets/sfx/NPCDespawn.m4a'));
-    game.load.audio('npc-hit1', require('./assets/sfx/NPCHit1.m4a'));
-    game.load.audio('npc-hit2', require('./assets/sfx/NPCHit3.m4a'));
-    game.load.audio('npc-hit3', require('./assets/sfx/NPCHit2.m4a'));
-    game.load.audio('breakglass1', require('./assets/sfx/PropBreakGlass1.m4a'));
-    game.load.audio('breakglass2', require('./assets/sfx/PropBreakGlass2.m4a'));
-    game.load.audio('breakglass3', require('./assets/sfx/PropBreakGlass3.m4a'));
-    game.load.audio('breakmetal1', require('./assets/sfx/PropBreakMetal1.m4a'));
-    game.load.audio('breakmetal2', require('./assets/sfx/PropBreakMetal2.m4a'));
-    game.load.audio('breakmetal3', require('./assets/sfx/PropBreakMetal3.m4a'));
-    game.load.audio('ready', require('./assets/sfx/Ready.m4a'));
-    game.load.audio('thisway', require('./assets/sfx/ThisWayMix.m4a'));
-    game.load.audio('dog1', require('./assets/sfx/Dog1.m4a'));
-    game.load.audio('dog2', require('./assets/sfx/Dog2.m4a'));
-    game.load.audio('dog3', require('./assets/sfx/Dog3.m4a'));
-    game.load.audio('grunt1', require('./assets/sfx/Pain1.m4a'));
-    game.load.audio('grunt2', require('./assets/sfx/Pain2.m4a'));
-    game.load.audio('grunt3', require('./assets/sfx/Pain3.m4a'));
-    game.load.audio('grunt4', require('./assets/sfx/Pain4.m4a'));
-    game.load.audio('grunt5', require('./assets/sfx/Pain5.m4a'));
-    game.load.audio('bossgrunt1', require('./assets/sfx/BossPain1.m4a'));
-    game.load.audio('bossgrunt2', require('./assets/sfx/BossPain2.m4a'));
-    game.load.audio('bossgrunt3', require('./assets/sfx/BossPain3.m4a'));
-    game.load.audio('bosssight', require('./assets/sfx/BossSight.m4a'));
-    game.load.audio('gloriacheer', require('./assets/sfx/GloriaCheer.m4a'));
-    game.load.audio('gloriawin', require('./assets/sfx/GloriaWin.m4a'));
+    // Add format check
+    const audioFormat = '.m4a';  // Sadece m4a formatını kullan
+
+    // Load audio files with proper format
+    const loadAudio = (key, path) => {
+      try {
+        // Build için doğru yol
+        game.load.audio(key, `assets/sfx/${path}${audioFormat}`);
+      } catch (e) {
+        console.warn(`Failed to load audio: ${key}`, e);
+      }
+    };
+
+    loadAudio('hero-dive', 'BrianDive');
+    loadAudio('hero-jump', 'BrianJump');
+    loadAudio('hero-kick1', 'BrianKick1');
+    loadAudio('hero-kick2', 'BrianKick2');
+    loadAudio('hero-kick3', 'BrianKick3');
+    loadAudio('hero-punch1', 'BrianPunch1');
+    loadAudio('hero-punch2', 'BrianPunch2');
+    loadAudio('hero-punch3', 'BrianPunch3');
+    loadAudio('death1', 'Death1');
+    loadAudio('death2', 'Death2');
+    loadAudio('death3', 'Death3');
+    loadAudio('death4', 'Death4');
+    loadAudio('door1', 'Door1');
+    loadAudio('door2', 'Door2');
+    loadAudio('door3', 'Door3');
+    loadAudio('foodpickup', 'FoodPickup');
+    loadAudio('gameover', 'GameOver');
+    loadAudio('go', 'Go');
+    loadAudio('npcdespawn', 'NPCDespawn');
+    loadAudio('npc-hit1', 'NPCHit1');
+    loadAudio('npc-hit2', 'NPCHit3');
+    loadAudio('npc-hit3', 'NPCHit2');
+    loadAudio('breakglass1', 'PropBreakGlass1');
+    loadAudio('breakglass2', 'PropBreakGlass2');
+    loadAudio('breakglass3', 'PropBreakGlass3');
+    loadAudio('breakmetal1', 'PropBreakMetal1');
+    loadAudio('breakmetal2', 'PropBreakMetal2');
+    loadAudio('breakmetal3', 'PropBreakMetal3');
+    loadAudio('ready', 'Ready');
+    loadAudio('thisway', 'ThisWayMix');
+    loadAudio('dog1', 'Dog1');
+    loadAudio('dog2', 'Dog2');
+    loadAudio('dog3', 'Dog3');
+    loadAudio('grunt1', 'Pain1');
+    loadAudio('grunt2', 'Pain2');
+    loadAudio('grunt3', 'Pain3');
+    loadAudio('grunt4', 'Pain4');
+    loadAudio('grunt5', 'Pain5');
+    loadAudio('bossgrunt1', 'BossPain1');
+    loadAudio('bossgrunt2', 'BossPain2');
+    loadAudio('bossgrunt3', 'BossPain3');
+    loadAudio('bosssight', 'BossSight');
+    loadAudio('gloriacheer', 'GloriaCheer');
+    loadAudio('gloriawin', 'GloriaWin');
   }
 
   static loadMusic(game, level) {
-      const path = './assets/musics/';
-      const musics = {
-        act2: 'GO17-Act2_aac.m4a',
-        act3: 'GO17-Act3_aac.m4a',
-        boss: 'GO17-Boss_aac.m4a',
-        maintheme: 'GO17-MainTheme_aac.m4a',
-        fanfare: 'GO17-Fanfare_aac.m4a'
-      };
-
-      game.load.audio(level, require('./assets/musics/' + musics[level]));
+    try {
+      // Build için doğru yol
+      game.load.audio(level, `assets/musics/GO17-${level}_aac.m4a`);
+    } catch (e) {
+      console.warn(`Failed to load music: ${level}`, e);
+    }
   }
 
   constructor(game) {
@@ -73,6 +82,38 @@ class Audio {
     this._musicOn = Globals.noMusic == false;
 
     this._current = null;
+    
+    // Initialize audio context
+    const startAudio = () => {
+      if (this.game.sound.context) {
+        // Unlock WebAudio
+        const context = this.game.sound.context;
+        if (context.state === 'suspended') {
+          context.resume();
+        }
+
+        // Create empty buffer
+        const buffer = context.createBuffer(1, 1, 22050);
+        const source = context.createBufferSource();
+        source.buffer = buffer;
+        source.connect(context.destination);
+        source.start(0);
+
+        // Remove event listeners
+        document.removeEventListener('click', startAudio);
+        document.removeEventListener('keydown', startAudio);
+        document.removeEventListener('touchstart', startAudio);
+      }
+    };
+
+    // Add multiple event listeners for user interaction
+    document.addEventListener('click', startAudio);
+    document.addEventListener('keydown', startAudio);
+    document.addEventListener('touchstart', startAudio);
+
+    // Fallback for audio format
+    this.game.sound.usingWebAudio = true;
+    this.game.sound.usingAudioTag = false;
 
     // add all possible musics
     this.musics = {
